@@ -43,6 +43,36 @@ export async function runCode(url) {
 }
 
 //otra forma:
+// Fetch API
+async function fetchData(urlApi) {
+  const options = {
+    method: 'GET'
+  };
+
+  const response = await fetch(urlApi, options);
+  const data = await response.json();
+  return data;
+}
+
+export async function runCode2(url) {
+  // Tu código aquí 👈
+  // URL Verification
+  try {
+    new URL(url);
+  } catch (e) {
+    throw new Error("Invalid URL");
+  }
+
+  // Return data or error in the promise
+  try {
+    const data = await fetchData(url);
+    return data
+  } catch {
+    throw new Error("Something was wrong");
+  }
+}
+
+//otra forma:
 export async function runCode1(url) {
   try {
     new URL(url);
